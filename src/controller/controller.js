@@ -8,6 +8,22 @@ const couchAuth = new NodeCouchDb({
 
 const dbName = "restaurant";
 
+module.exports.Listar = function(res, pageRender, parameters={}) {
+    const viewUrl = "_design/all_pizzas/_view/all";
+    couchAuth.get(dbName, viewUrl).then(({data, headers, status}) => {
+        // data is json response
+        if(pageRender) {
+            res.render(pageRender, {pizzas: (data.rows), params: parameters })
+        } 
+        // headers is an object with all response headers
+        // status is statusCode number
+    }, err => {
+        // either request error occured
+        // ...or err.code=EDOCMISSING if document is missing
+        // ...or err.code=EUNKNOWN if statusCode is unexpected
+    });
+}
+
 module.exports.Insertar = function (pizzaInsert, precioInsert) {
     couchAuth.insert(dbName, {
         pizza: pizzaInsert,
@@ -23,7 +39,7 @@ module.exports.Insertar = function (pizzaInsert, precioInsert) {
 }
 
 module.exports.Actualizar = function(idUpdate, revUpdate, pizzaUpdate, precioUpdate) {
-    console.log("HOLA");
+    console.log(idUpdate);
     couchAuth.update(dbName, {
         _id: idUpdate,
         _rev: revUpdate,

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+    <title><%= params.title %></title>
 </head>
 <body>
     <style>
@@ -19,16 +19,28 @@
             font-family: sans-serif;
             font-weight: bold;
         }
+
+        #id, #rev{
+            display: none;
+        }
     </style>
     <form role="form" method="post">
-        <p>ID del registro a actualizar:</p>
-        <input type="text" id="id" name="id">
-        <p>Version REV de documento:</p>
-        <input type="text" id="rev" name="rev">
+        <input type="text" id="id" name="id" value="<%= params.id %>">
+        <input type="text" id="rev" name="rev" value="<%= params.rev %>">
+        <% 
+        var vPizza;
+        var vPrecio;
+        pizzas.forEach(function(pizza) { 
+            if(pizza.id == params.id && pizza.value.rev == params.rev){
+                vPizza = pizza.value.name;
+                vPrecio = pizza.value.precio;
+            }
+        });
+        %>
         <p>Nombre de Pizza:</p>
-        <input type="text" id="pizza" name="pizza">
+        <input type="text" id="pizza" name="pizza" value="<%= vPizza %>">
         <p>Precio de Pizza:</p>
-        <input type="text" id="precio" name="precio">
+        <input type="text" id="precio" name="precio" value="<%= vPrecio %>">
         <button id="cargar" type="submit">Actualizar Registro</button>
     </form>
     <a href="/">

@@ -27,27 +27,10 @@ const couchAuth = new NodeCouchDb({
 
 const dbName = "restaurant";
 
-router.get('/listar', (req, res) => {
-    const viewUrl = "_design/all_pizzas/_view/all";
-    
-    couchAuth.get(dbName, viewUrl).then(({data, headers, status}) => {
-        // data is json response
-        res.render('listar', { title: 'Listado de Pizzas', pizzas: (data.rows) })
-        console.log(data)
-        // headers is an object with all response headers
-        // status is statusCode number
-    }, err => {
-        // either request error occured
-        // ...or err.code=EDOCMISSING if document is missing
-        // ...or err.code=EUNKNOWN if statusCode is unexpected
-    });
-    
-});
 
 router.get('/', (req, res) => {
-    res.render('index');
+    fun.Listar(res, 'index');
 })
-
 
 router.get('/insertar', (req, res) => {
 
@@ -57,7 +40,6 @@ router.get('/insertar', (req, res) => {
 
 router.post('/insertar', (req, res) => {
     console.log(req.body)
-    res.send('Insertado')
 
     let newDocument = {
         pizza: req.body.pizza,
@@ -65,14 +47,16 @@ router.post('/insertar', (req, res) => {
     }
 
     fun.Insertar(newDocument.pizza, newDocument.precio);
+    res.redirect('/')
 })
 
-router.get('/actualizar', (req, res) => {
-    res.render('actualizar', { title: 'Actualizar un registro'})
+router.get('/actualizar/:id/:rev', (req, res) => {
+    idRes = req.params.id;
+    revRes = req.params.rev;
+    fun.Listar(res, 'actualizar', { title: 'Actualizar un registro', id: idRes, rev: revRes})
 })
 
-router.post('/actualizar', (req, res) => {
-    res.send('Actualizado')
+router.post('/actualizar/:id/:rev', (req, res) => {
 
     let updateDocument = {
         id: req.body.id,
@@ -82,21 +66,15 @@ router.post('/actualizar', (req, res) => {
     }
 
     fun.Actualizar(updateDocument.id, updateDocument.rev, updateDocument.pizza, updateDocument.precio)
+    res.redirect('/')
 })
 
-router.get('/borrar', (req, res) => {
-    res.render('borrar', {title: 'Borrar un registro'})
-})
+router.get('/borrar/:id/:rev', (req, res) => {
+    var idRes = req.params.id;
+    var revRes = req.params.rev;
 
-router.post('/borrar', (req, res) => {
-    res.send('Borrado')
-
-    let deleteDocument = {
-        id: req.body.id,
-        rev: req.body.rev,
-    }
-
-    fun.Borrar(deleteDocument.id, deleteDocument.rev)
+    fun.Borrar(idRes, revRes)
+    res.render('borrar')
 })
 
 module.exports = router;
