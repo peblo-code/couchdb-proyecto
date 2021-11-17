@@ -34,6 +34,8 @@
             if(pizza.id == params.id && pizza.value.rev == params.rev){
                 vPizza = pizza.value.name;
                 vPrecio = pizza.value.precio;
+                vIngredientes = pizza.value.ingredientes;
+                vTamanio = pizza.value.tamanio;
             }
         });
         %>
@@ -41,6 +43,10 @@
         <input type="text" id="pizza" name="pizza" value="<%= vPizza %>">
         <p>Precio de Pizza:</p>
         <input type="text" id="precio" name="precio" value="<%= vPrecio %>">
+        <p>Ingredientes:</p>
+        <input type="text" id="ingredientes" name="ingredientes" value="<%= vIngredientes %>">
+        <p>Tamaño de Pizza:</p>
+        <input type="text" id="tamanio" name="tamanio" value="<%= vTamanio %>">
         <button id="cargar" type="submit">Actualizar Registro</button>
     </form>
     <a href="/">

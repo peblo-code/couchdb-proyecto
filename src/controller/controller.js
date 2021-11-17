@@ -24,9 +24,13 @@ module.exports.Listar = function(res, pageRender, parameters={}) {
     });
 }
 
-module.exports.Insertar = function (pizzaInsert, precioInsert) {
+module.exports.Insertar = function (pizzaInsert, ingredientesInsert, tamanioInsert, precioInsert) {
     couchAuth.insert(dbName, {
         pizza: pizzaInsert,
+        caracteristicas: {
+            ingredientes: ingredientesInsert,
+            tamanio: tamanioInsert,
+        },
         precio: precioInsert
     }).then(({data, headers, status}) => {
         // data is json response
@@ -38,12 +42,16 @@ module.exports.Insertar = function (pizzaInsert, precioInsert) {
     });    
 }
 
-module.exports.Actualizar = function(idUpdate, revUpdate, pizzaUpdate, precioUpdate) {
+module.exports.Actualizar = function(idUpdate, revUpdate, pizzaUpdate, ingredientesUpdate, tamanioUpdate, precioUpdate) {
     console.log(idUpdate);
     couchAuth.update(dbName, {
         _id: idUpdate,
         _rev: revUpdate,
         pizza: pizzaUpdate,
+        caracteristicas: {
+            ingredientes: ingredientesUpdate,
+            tamanio: tamanioUpdate,
+        },
         precio: precioUpdate
     }).then(({data, headers, status}) => {
         // data is json response

@@ -43,16 +43,21 @@ router.post('/insertar', (req, res) => {
 
     let newDocument = {
         pizza: req.body.pizza,
+        ingredientes: req.body.ingredientes,
+        tamanio: req.body.tamanio,
         precio: req.body.precio
     }
 
-    fun.Insertar(newDocument.pizza, newDocument.precio);
+    var { pizza, ingredientes, tamanio, precio } = newDocument;
+
+    fun.Insertar(pizza, ingredientes, tamanio, precio);
     res.redirect('/')
 })
 
 router.get('/actualizar/:id/:rev', (req, res) => {
     idRes = req.params.id;
     revRes = req.params.rev;
+
     fun.Listar(res, 'actualizar', { title: 'Actualizar un registro', id: idRes, rev: revRes})
 })
 
@@ -62,10 +67,14 @@ router.post('/actualizar/:id/:rev', (req, res) => {
         id: req.body.id,
         rev: req.body.rev,
         pizza: req.body.pizza,
+        ingredientes: req.body.ingredientes,
+        tamanio: req.body.tamanio,
         precio: req.body.precio
     }
 
-    fun.Actualizar(updateDocument.id, updateDocument.rev, updateDocument.pizza, updateDocument.precio)
+    var { id, rev ,pizza, ingredientes, tamanio, precio } = updateDocument;
+
+    fun.Actualizar(id, rev ,pizza, ingredientes, tamanio, precio)
     res.redirect('/')
 })
 

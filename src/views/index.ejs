@@ -82,13 +82,15 @@
         <table>
             <thead>
                 <tr>
-                    <th>Pizza</th><th>Costo</th><th>Editar</th>
+                    <th>Pizza</th><th>Costo</th><th>Ingredientes</th><th>Tamaño</th><th>Editar</th>
                 </tr>
             </thead>
             <% pizzas.forEach(function(pizza) { %>
                 <tr>
                     <td><%= pizza.value.name %></td>
                     <td><%= pizza.value.precio %></td>
+                    <td><%= pizza.value.ingredientes %></td>
+                    <td><%= pizza.value.tamanio %></td>
                     <td><a href="/actualizar/<%= pizza.id %>/<%= pizza.value.rev %>">Editar</a>
                     <a href="/borrar/<%= pizza.id %>/<%= pizza.value.rev %>" onclick="return confirm('Estas seguro de borrar este registro')">Borrar</a></td>
                 </tr>
