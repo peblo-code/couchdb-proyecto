@@ -84,7 +84,7 @@ router.post('/insertarEmpleado', (req, res) => {
     var { nombre_empleado, apellido_empleado, edad_empleado } = newDocument;
 
     fun.InsertarEmpleado(nombre_empleado, apellido_empleado, edad_empleado);
-    res.redirect('../empleado')
+    res.redirect('/empleado')
 })
 
 //SECCION DE ACTUALIZAR
