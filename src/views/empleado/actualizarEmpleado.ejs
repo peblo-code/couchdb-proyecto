@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= params.title %></title>
+</head>
+<body>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        html {
+            height: 100%;
+            background: gray;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        #id, #rev{
+            display: none;
+        }
+    </style>
+    <form role="form" method="post">
+        <input type="text" id="id" name="id" value="<%= params.id %>">
+        <input type="text" id="rev" name="rev" value="<%= params.rev %>">
+        <% 
+        var vUsuario;
+        var vApellido;
+        pizzas.forEach(function(pizza) { 
+            if(pizza.id == params.id && pizza.value.rev == params.rev){
+                vUsuario = pizza.value.nombre_empleado;
+                vApellido = pizza.value.apellido_empleado;
+                vEdad = pizza.value.edad_empleado;
+            }
+        });
+        %>
+        <p>Nombre de Usuario:</p>
+        <input type="text" id="nombre_empleado" name="nombre_empleado" value="<%= vUsuario %>">
+        <p>Apellido:</p>
+        <input type="text" id="apellido_empleado" name="apellido_empleado" value="<%= vApellido %>">
+        <p>Edad:</p>
+        <input type="text" id="edad_empleado" name="edad_empleado" value="<%= vEdad %>">
+        <button id="cargar" type="submit">Actualizar Empleado</button>
+    </form>
+    <a href="/">
+        <button>Volver</button>
+    </a>
+</body>
+</html>

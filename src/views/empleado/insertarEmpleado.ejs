@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+    <style>
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        html {
+            height: 100%;
+            background: gray;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+    </style>
+    <form method="post" role="form">
+        <h2>Nombre de Usuario</h2>
+        <input type="text" id="nombre_usuario" name="nombre_usuario">
+        <h2>Apellido</h2>
+        <input type="text" id="apellido_usuario" name="apellido_usuario">
+        <h2>Edad</h2>
+        <input type="number" id="edad_usuario" name="edad_usuario">
+        <button id="cargar" type="submit">Cargar Empleado</button>
+    </form>
+    <a href="/">
+        <button>Volver</button>
+    </a>
+</body>
+</html>
