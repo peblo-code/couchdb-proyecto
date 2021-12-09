@@ -36,17 +36,16 @@ router.get('/', (req, res) => {
     fun.Listar(res, 'index', {}, viewUrl);
 })
 
+//SEECCION DE LISTAR EMPLEADOS
+
 router.get('/empleado', (req, res) => {
-    var viewUrl1 = "_design/all_pizzas/_view/empleados"
-    fun.Listar(res, 'empleado', {} ,viewUrl1);
+    fun.Listar(res, 'empleado/empleado', {} ,viewUrlUsers);
 })
 
 //SECCION DE INSERTAR
 
 router.get('/insertar', (req, res) => {
-
     res.render('insertar', { title: 'Insertar nuevo registro'})
-    
 });
 
 router.post('/insertar', (req, res) => {
@@ -65,6 +64,8 @@ router.post('/insertar', (req, res) => {
     res.redirect('/')
 })
 
+//SECCION DE INSERTAR DE EMPLEADOS
+
 router.get('/insertarEmpleado', (req, res) => {
 
     res.render('./empleado/insertarEmpleado', { title: 'Insertar nuevo empleado'})
@@ -82,8 +83,8 @@ router.post('/insertarEmpleado', (req, res) => {
 
     var { nombre_empleado, apellido_empleado, edad_empleado } = newDocument;
 
-    fun.Insertar(nombre_empleado, apellido_empleado, edad_empleado);
-    res.redirect('/empleado')
+    fun.InsertarEmpleado(nombre_empleado, apellido_empleado, edad_empleado);
+    res.redirect('../empleado')
 })
 
 //SECCION DE ACTUALIZAR
@@ -97,7 +98,6 @@ router.get('/actualizar/:id/:rev', (req, res) => {
 
 router.post('/actualizar/:id/:rev', (req, res) => {
     
-
     let updateDocument = {
         id: req.body.id,
         rev: req.body.rev,
@@ -113,11 +113,13 @@ router.post('/actualizar/:id/:rev', (req, res) => {
     res.redirect('/')
 })
 
+//SECCION DE ACTUALIZAR DE EMPLEADOS
+
 router.get('/actualizarEmpleado/:id/:rev', (req, res) => {
     idRes = req.params.id;
     revRes = req.params.rev;
 
-    fun.Listar(res, './empleado/empleado', { title: 'Actualizar un registro', id: idRes, rev: revRes})
+    fun.Listar(res, './empleado/actualizarEmpleado', { title: 'Actualizar un registro', id: idRes, rev: revRes}, viewUrlUsers)
 })
 
 router.post('/actualizarEmpleado/:id/:rev', (req, res) => {
@@ -132,7 +134,7 @@ router.post('/actualizarEmpleado/:id/:rev', (req, res) => {
 
     var { id, rev, nombre_empleado, apellido_empleado, edad_empleado } = updateDocument;
 
-    fun.Actualizar(id, rev, nombre_empleado, apellido_empleado, edad_empleado)
+    fun.ActualizarEmpleado(id, rev, nombre_empleado, apellido_empleado, edad_empleado)
     res.redirect('/empleado')
 })
 
@@ -144,19 +146,6 @@ router.get('/borrar/:id/:rev', (req, res) => {
 
     fun.Borrar(idRes, revRes)
     res.render('borrar')
-})
-
-<<<<<<< HEAD
-router.get('/empleado', (req, res) => {
-    fun.Listar(res, 'empleado', {}, viewUrlUsers);
-=======
-router.get('/borrarEmpleado/:id/:rev', (req, res) => {
-    var idRes = req.params.id;
-    var revRes = req.params.rev;
-
-    fun.Borrar(idRes, revRes)
-    res.render('borrar')
->>>>>>> 1a5fbbb65d01370e3e6ac1c2f0783eb91f81f1a6
 })
 
 module.exports = router;

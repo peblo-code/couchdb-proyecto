@@ -78,6 +78,10 @@
         <button class="boton">Volver</button>
     </a>
 
+    <a href="insertarEmpleado">
+        <button class="boton">Insertar</button>
+    </a>
+
     <section class="container">
         <table>
             <thead>
@@ -91,7 +95,7 @@
                     <td><%= pizza.value.nombre_empleado %></td>
                     <td><%= pizza.value.apellido_empleado %></td>
                     <td><%= pizza.value.edad_empleado %></td>
-                    <td><a href="/actualizar/<%= pizza.id %>/<%= pizza.value.rev %>">Editar</a>
+                    <td><a href="/actualizarEmpleado/<%= pizza.id %>/<%= pizza.value.rev %>">Editar</a>
                     <a href="/borrar/<%= pizza.id %>/<%= pizza.value.rev %>" onclick="return confirm('Estas seguro de borrar este registro')">Borrar</a></td>
                 </tr>
                 <% } %>

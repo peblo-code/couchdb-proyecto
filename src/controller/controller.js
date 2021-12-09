@@ -41,6 +41,21 @@ module.exports.Insertar = function (pizzaInsert, ingredientesInsert, tamanioInse
     });    
 }
 
+module.exports.InsertarEmpleado = function (nombre_empleadoInsert, apellido_empleadoInsert, edad_empleadoInsert) {
+    couchAuth.insert(dbName, {
+        nombre_empleado: nombre_empleadoInsert,
+        apellido_empleado: apellido_empleadoInsert,
+        edad_empleado: edad_empleadoInsert
+    }).then(({data, headers, status}) => {
+        // data is json response
+        // headers is an object with all response headers
+        // status is statusCode number
+    }, err => {
+        // either request error occured
+        // ...or err.code=EDOCCONFLICT if document with the same id already exists
+    });    
+}
+
 module.exports.Actualizar = function(idUpdate, revUpdate, pizzaUpdate, ingredientesUpdate, tamanioUpdate, precioUpdate) {
     console.log(idUpdate);
     couchAuth.update(dbName, {
@@ -52,6 +67,25 @@ module.exports.Actualizar = function(idUpdate, revUpdate, pizzaUpdate, ingredien
             tamanio: tamanioUpdate,
         },
         precio: precioUpdate
+    }).then(({data, headers, status}) => {
+        // data is json response
+        // headers is an object with all response headers
+        // status is statusCode number
+    }, err => {
+        // either request error occured
+        // ...or err.code=EFIELDMISSING if either _id or _rev fields are missing
+    });
+    
+}
+
+module.exports.ActualizarEmpleado = function(idUpdate, revUpdate, nombre_empleadoUpdate, apellido_empleadoUpdate, edad_empleadoUpdate) {
+    console.log(idUpdate);
+    couchAuth.update(dbName, {
+        _id: idUpdate,
+        _rev: revUpdate,
+        nombre_empleado: nombre_empleadoUpdate,
+        apellido_empleado: apellido_empleadoUpdate,
+        edad_empleado: edad_empleadoUpdate
     }).then(({data, headers, status}) => {
         // data is json response
         // headers is an object with all response headers
