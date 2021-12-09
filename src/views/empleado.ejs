@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Inicio</title>
+    <title>Empleados</title>
 </head>
 <body>
     <style>
@@ -74,29 +74,28 @@
             color: white;
         }
     </style>
-    <a href="./insertar">
-        <button class="boton">Insertar</button>
-    </a>
-    <a href="./empleado">
-        <button class="boton">Empleados</button>
+    <a href="./">
+        <button class="boton">Volver</button>
     </a>
 
     <section class="container">
         <table>
             <thead>
                 <tr>
-                    <th>Pizza</th><th>Costo</th><th>Ingredientes</th><th>Tamaño</th><th>Editar</th>
+                    <th>Nombre</th><th>Apellido</th><th>Edad</th><th>Editar</th>
                 </tr>
             </thead>
             <% pizzas.forEach(function(pizza) { %>
+                <% if (pizza.value.nombre_empleado) { %>
                 <tr>
-                    <td><%= pizza.value.name %></td>
-                    <td><%= pizza.value.precio %></td>
-                    <td><%= pizza.value.ingredientes %></td>
-                    <td><%= pizza.value.tamanio %></td>
+                    <td><%= pizza.value.nombre_empleado %></td>
+                    <td><%= pizza.value.apellido_empleado %></td>
+                    <td><%= pizza.value.edad_empleado %></td>
                     <td><a href="/actualizar/<%= pizza.id %>/<%= pizza.value.rev %>">Editar</a>
                     <a href="/borrar/<%= pizza.id %>/<%= pizza.value.rev %>" onclick="return confirm('Estas seguro de borrar este registro')">Borrar</a></td>
                 </tr>
+                <% } %>
+
             <% }); %>
         </table>
     </section>

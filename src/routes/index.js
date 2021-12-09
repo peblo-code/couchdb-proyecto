@@ -29,7 +29,8 @@ const dbName = "restaurant";
 
 
 router.get('/', (req, res) => {
-    fun.Listar(res, 'index');
+    const viewUrl = "_design/all_pizzas/_view/all";
+    fun.Listar(res, 'index', {}, viewUrl);
 })
 
 router.get('/insertar', (req, res) => {
@@ -84,6 +85,11 @@ router.get('/borrar/:id/:rev', (req, res) => {
 
     fun.Borrar(idRes, revRes)
     res.render('borrar')
+})
+
+router.get('/empleado', (req, res) => {
+    var viewUrl1 = "_design/all_pizzas/_view/empleados"
+    fun.Listar(res, 'empleado', {} ,viewUrl1);
 })
 
 module.exports = router;

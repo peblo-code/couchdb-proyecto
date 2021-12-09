@@ -8,8 +8,7 @@ const couchAuth = new NodeCouchDb({
 
 const dbName = "restaurant";
 
-module.exports.Listar = function(res, pageRender, parameters={}) {
-    const viewUrl = "_design/all_pizzas/_view/all";
+module.exports.Listar = function(res, pageRender, parameters={}, viewUrl) {
     couchAuth.get(dbName, viewUrl).then(({data, headers, status}) => {
         // data is json response
         if(pageRender) {
